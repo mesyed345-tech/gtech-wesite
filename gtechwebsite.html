@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G-Tech Solar</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .top-bar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+        
+        .top-bar h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .bottom-bar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 60px;
+        }
+        
+        .login-container, .main-menu, .data-entry, .view-data {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-top: 0;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .date-display {
+            text-align: left;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        input[type="text"],
+        input[type="password"],
+        input[type="number"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .menu-button {
+            display: block;
+            width: 80%;
+            margin: 15px auto;
+            padding: 15px;
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: right;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .tick-box {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .tick-box.checked {
+            background-color: #2ecc71;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .success {
+            color: #2ecc71;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .export-btn {
+            background-color: #27ae60;
+            margin-top: 20px;
+        }
+        
+        .export-btn:hover {
+            background-color: #219653;
+        }
+        
+        .delete-btn {
+            background-color: #e74c3c;
+        }
+        
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .back-btn {
+            background-color: #95a5a6;
+        }
+        
+        .back-btn:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .save-btn {
+            background-color: #2ecc71;
+        }
+        
+        .save-btn:hover {
+            background-color: #27ae60;
+        }
+        <style>
+    /* Existing styles remain the same until line 102 */
+    
+    /* Add these new media queries at the end of the style section */
+    
+    /* Tablet and small desktop screens */
+    @media (max-width: 992px) {
+        .container {
+            padding: 15px;
+        }
+        
+        .top-bar h1 {
+            font-size: 2rem;
+        }
+        
+        button {
+            padding: 10px 15px;
+        }
+        
+        .menu-button {
+            width: 90%;
+        }
+    }
+    
+    /* Mobile devices (landscape) */
+    @media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+        
+        .login-container, .main-menu, .data-entry {
+            padding: 20px;
+        }
+        
+        .top-bar h1 {
+            font-size: 1.8rem;
+        }
+        
+        th, td {
+            padding: 8px;
+            font-size: 0.9rem;
+        }
+        
+        input[type="text"],
+        input[type="password"],
+        input[type="number"],
+        input[type="date"],
+        select {
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        .button-group {
+            flex-direction: column;
+        }
+        
+        .button-group button {
+            margin-bottom: 10px;
+            margin-right: 0;
+            width: 100%;
+        }
+    }
+    
+    /* Small mobile devices (portrait) */
+    @media (max-width: 480px) {
+        .top-bar h1 {
+            font-size: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 1.3rem;
+        }
+        
+        .container {
+            padding: 5px;
+        }
+        
+        .login-container, .main-menu, .data-entry {
+            padding: 15px;
+            margin: 10px auto;
+        }
+        
+        /* Make tables horizontally scrollable on small screens */
+        table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .menu-button {
+            width: 95%;
+            padding: 12px;
+            font-size: 16px;
+        }
+        
+        .bottom-bar {
+            font-size: 0.8rem;
+            padding: 8px 0;
+        }
+    }
+    
+    /* Very small devices */
+    @media (max-width: 360px) {
+        .top-bar h1 {
+            font-size: 1.3rem;
+        }
+        
+        .menu-button {
+            font-size: 15px;
+        }
+        
+        input[type="text"],
+        input[type="password"],
+        input[type="number"],
+        input[type="date"],
+        select {
+            padding: 8px;
+        }
+    }
+
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <h1>G-Tech Solar</h1>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Login Page -->
+        <div id="login-page" class="login-container">
+            <h2>لاگ ان</h2>
+            <div class="form-group">
+                <label for="email">ای میل</label>
+                <input type="text" id="email" placeholder="ای میل درج کریں">
+                <div id="email-error" class="error hidden"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">پاس ورڈ</label>
+                <input type="password" id="password" placeholder="پاس ورڈ درج کریں">
+                <div id="password-error" class="error hidden"></div>
+            </div>
+            <div class="button-group">
+                <button id="login-btn">لاگ ان</button>
+            </div>
+        </div>
+
+        <!-- Main Menu -->
+        <div id="main-menu" class="main-menu hidden">
+            <div class="date-display" id="main-menu-date"></div>
+            <h2>مینو</h2>
+            <button class="menu-button" id="enter-data-btn">ڈیٹا درج کریں</button>
+            <button class="menu-button" id="view-data-btn">محفوظ شدہ ڈیٹا دیکھیں</button>
+        </div>
+
+        <!-- Enter Data Menu -->
+        <div id="enter-data-menu" class="main-menu hidden">
+            <div class="date-display" id="enter-data-date"></div>
+            <h2>ڈیٹا درج کریں</h2>
+            <button class="menu-button" id="customer-btn">کسٹمر</button>
+            <button class="menu-button" id="salary-btn">تنخواہ</button>
+            <div class="button-group">
+                <button class="back-btn" id="back-from-enter-data">واپس</button>
+            </div>
+        </div>
+
+        <!-- Customer Data Entry -->
+        <div id="customer-data-entry" class="data-entry hidden">
+            <div class="date-display" id="customer-date"></div>
+            <h2>کسٹمر ڈیٹا درج کریں</h2>
+            <div class="form-group">
+                <label for="customer-date-input">تاریخ</label>
+                <input type="date" id="customer-date-input">
+            </div>
+            <div class="form-group">
+                <label for="customer-name">نام</label>
+                <input type="text" id="customer-name" placeholder="کسٹمر کا نام درج کریں">
+            </div>
+            <div class="form-group">
+                <label for="customer-location">مقام</label>
+                <input type="text" id="customer-location" placeholder="مقام درج کریں">
+            </div>
+            <div class="form-group">
+                <label for="customer-amount-paid">ادا شدہ رقم</label>
+                <input type="number" id="customer-amount-paid" placeholder="ادا شدہ رقم درج کریں">
+            </div>
+            <div class="form-group">
+                <label for="customer-amount-due">بقایا رقم</label>
+                <input type="number" id="customer-amount-due" placeholder="بقایا رقم درج کریں">
+            </div>
+            <div class="form-group">
+                <label for="customer-project">پروجیکٹ/پروڈکٹ</label>
+                <input type="text" id="customer-project" placeholder="پروجیکٹ یا پروڈکٹ درج کریں">
+            </div>
+            <div class="button-group">
+                <button class="back-btn" id="back-from-customer">واپس</button>
+                <button class="save-btn" id="save-customer">محفوظ کریں</button>
+            </div>
+            <div id="customer-success" class="success hidden">ڈیٹا کامیابی سے محفوظ ہو گیا!</div>
+        </div>
+
+        <!-- Salary Data Entry -->
+        <div id="salary-data-entry" class="data-entry hidden">
+            <div class="date-display" id="salary-date"></div>
+            <h2>تنخواہ ڈیٹا درج کریں</h2>
+            <div class="form-group">
+                <label for="salary-date-input">تاریخ</label>
+                <input type="date" id="salary-date-input">
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>نام</th>
+                        <th>تنخواہ</th>
+                        <th>مکمل</th>
+                    </tr>
+                </thead>
+                <tbody id="salary-table-body">
+                    <!-- Worker rows will be added here by JavaScript -->
+                </tbody>
+            </table>
+            <div class="button-group">
+                <button class="back-btn" id="back-from-salary">واپس</button>
+                <button class="save-btn" id="save-salary">محفوظ کریں</button>
+            </div>
+            <div id="salary-success" class="success hidden">ڈیٹا کامیابی سے محفوظ ہو گیا!</div>
+        </div>
+
+        <!-- View Data Menu -->
+        <div id="view-data-menu" class="main-menu hidden">
+            <div class="date-display" id="view-data-date"></div>
+            <h2>محفوظ شدہ ڈیٹا دیکھیں</h2>
+            <button class="menu-button" id="view-customer-btn">کسٹمر ڈیٹا</button>
+            <button class="menu-button" id="view-salary-btn">تنخواہ ڈیٹا</button>
+            <div class="button-group">
+                <button class="back-btn" id="back-from-view-data">واپس</button>
+            </div>
+        </div>
+
+        <!-- View Customer Data -->
+        <div id="view-customer-data" class="data-entry hidden">
+            <div class="date-display" id="view-customer-date"></div>
+            <h2>محفوظ شدہ کسٹمر ڈیٹا</h2>
+            <div class="form-group">
+                <label for="view-customer-password">پاس ورڈ</label>
+                <input type="password" id="view-customer-password" placeholder="پاس ورڈ درج کریں">
+                <div id="view-customer-password-error" class="error hidden"></div>
+            </div>
+            <button id="view-customer-submit">دیکھیں</button>
+            <div id="customer-data-container" class="hidden">
+                <table id="customer-data-table">
+                    <thead>
+                        <tr>
+                            <th>تاریخ</th>
+                            <th>نام</th>
+                            <th>مقام</th>
+                            <th>ادا شدہ رقم</th>
+                            <th>بقایا رقم</th>
+                            <th>پروجیکٹ/پروڈکٹ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customer-data-body">
+                        <!-- Customer data will be added here by JavaScript -->
+                    </tbody>
+                </table>
+                <div class="button-group">
+                    <button class="export-btn" id="export-customer">ایکسپورٹ کریں</button>
+                    <button class="delete-btn" id="delete-customer">ڈیلیٹ کریں</button>
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="back-btn" id="back-from-view-customer">واپس</button>
+            </div>
+        </div>
+
+        <!-- View Salary Data -->
+        <div id="view-salary-data" class="data-entry hidden">
+            <div class="date-display" id="view-salary-date"></div>
+            <h2>محفوظ شدہ تنخواہ ڈیٹا</h2>
+            <div class="form-group">
+                <label for="view-salary-password">پاس ورڈ</label>
+                <input type="password" id="view-salary-password" placeholder="پاس ورڈ درج کریں">
+                <div id="view-salary-password-error" class="error hidden"></div>
+            </div>
+            <button id="view-salary-submit">دیکھیں</button>
+            <div id="salary-data-container" class="hidden">
+                <table id="salary-data-table">
+                    <thead>
+                        <tr>
+                            <th>تاریخ</th>
+                            <th>نام</th>
+                            <th>تنخواہ</th>
+                            <th>مکمل</th>
+                        </tr>
+                    </thead>
+                    <tbody id="salary-data-body">
+                        <!-- Salary data will be added here by JavaScript -->
+                    </tbody>
+                </table>
+                <div class="button-group">
+                    <button class="export-btn" id="export-salary">ایکسپورٹ کریں</button>
+                    <button class="delete-btn" id="delete-salary">ڈیلیٹ کریں</button>
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="back-btn" id="back-from-view-salary">واپس</button>
+            </div>
+        </div>
+
+        <!-- Delete Confirmation -->
+        <div id="delete-confirmation" class="data-entry hidden">
+            <h2>ڈیٹا حذف کریں</h2>
+            <div class="form-group">
+                <label for="delete-password">تصدیق کے لیے پاس ورڈ درج کریں</label>
+                <input type="password" id="delete-password" placeholder="پاس ورڈ درج کریں">
+                <div id="delete-password-error" class="error hidden"></div>
+            </div>
+            <div class="button-group">
+                <button class="back-btn" id="cancel-delete">منسوخ کریں</button>
+                <button class="delete-btn" id="confirm-delete">تصدیق کریں</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="bottom-bar">
+        G-Tech Solar | مقام: [Near Gujrat GymKhana] | رابطہ: [03006279253]
+    </div>
+
+    <script>
+        // Worker names
+        const workers = [
+            "اعتزاز بٹ",
+            "وسیم بٹ",
+            "سعد وڑائچ",
+            "شانی بابا استاد",
+            "سرمد علی",
+            "اویس",
+            "بلال",
+            "عمر",
+            "فیض الحسن",
+            "قلندر شاہ",
+            "ظلے شاہ",
+            "جواد",
+            "علی حسین جمالپور",
+            "زین علی",
+            "سرتاج",
+            "شوکت علی",
+            "قیصر علی",
+            "نعیم عبّاس",
+            "سلیم عبّاس",
+            "محمّد نوید",
+            "محمّد عمران جلال پور جٹاں",
+            "ریحان خان",
+            "محمّد عمران مدینہ",
+            "ابوبکر",
+            "غلام عبّاس ویلڈر",
+            "حسن چھوٹا",
+            "سعد بٹ",
+            "عبید بٹ",
+            "احمد رکشا",
+            "محمّد شفیع",
+            "گڈو شاہ",
+            "اضافی کارکن" // Extra worker as requested
+        ];
+
+        // Current date display
+        function updateDateDisplay(elementId) {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById(elementId).textContent = `تاریخ: ${now.toLocaleDateString('ur-PK', options)}`;
+        }
+
+        // Initialize the salary table
+        function initializeSalaryTable() {
+            const tableBody = document.getElementById('salary-table-body');
+            tableBody.innerHTML = '';
+            
+            workers.forEach(worker => {
+                const row = document.createElement('tr');
+                
+                const nameCell = document.createElement('td');
+                nameCell.textContent = worker;
+                row.appendChild(nameCell);
+                
+                const salaryCell = document.createElement('td');
+                const salaryInput = document.createElement('input');
+                salaryInput.type = 'number';
+                salaryInput.className = 'salary-input';
+                salaryCell.appendChild(salaryInput);
+                row.appendChild(salaryCell);
+                
+                const doneCell = document.createElement('td');
+                const tickBox = document.createElement('div');
+                tickBox.className = 'tick-box';
+                tickBox.addEventListener('click', function() {
+                    this.classList.toggle('checked');
+                });
+                doneCell.appendChild(tickBox);
+                row.appendChild(doneCell);
+                
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Navigation functions
+        function showPage(pageId) {
+            document.querySelectorAll('.login-container, .main-menu, .data-entry').forEach(element => {
+                element.classList.add('hidden');
+            });
+            document.getElementById(pageId).classList.remove('hidden');
+            
+            // Update date display for the current page
+            if (pageId.includes('date')) {
+                updateDateDisplay(pageId + '-date');
+            }
+        }
+
+        // Data storage
+        let customerData = JSON.parse(localStorage.getItem('customerData')) || [];
+        let salaryData = JSON.parse(localStorage.getItem('salaryData')) || [];
+
+        // Save customer data
+        document.getElementById('save-customer').addEventListener('click', function() {
+            const date = document.getElementById('customer-date-input').value;
+            const name = document.getElementById('customer-name').value;
+            const location = document.getElementById('customer-location').value;
+            const amountPaid = document.getElementById('customer-amount-paid').value;
+            const amountDue = document.getElementById('customer-amount-due').value;
+            const project = document.getElementById('customer-project').value;
+            
+            if (!date || !name || !location || !amountPaid || !amountDue || !project) {
+                alert('براہ کرم تمام فیلڈز کو پُر کریں');
+                return;
+            }
+            
+            customerData.push({
+                date,
+                name,
+                location,
+                amountPaid,
+                amountDue,
+                project
+            });
+            
+            localStorage.setItem('customerData', JSON.stringify(customerData));
+            
+            // Show success message
+            const successElement = document.getElementById('customer-success');
+            successElement.classList.remove('hidden');
+            setTimeout(() => {
+                successElement.classList.add('hidden');
+            }, 3000);
+            
+            // Clear form
+            document.getElementById('customer-name').value = '';
+            document.getElementById('customer-location').value = '';
+            document.getElementById('customer-amount-paid').value = '';
+            document.getElementById('customer-amount-due').value = '';
+            document.getElementById('customer-project').value = '';
+        });
+
+        // Save salary data
+        document.getElementById('save-salary').addEventListener('click', function() {
+            const date = document.getElementById('salary-date-input').value;
+            if (!date) {
+                alert('براہ کرم تاریخ درج کریں');
+                return;
+            }
+            
+            const salaryEntries = [];
+            const rows = document.getElementById('salary-table-body').rows;
+            
+            for (let i = 0; i < rows.length; i++) {
+                const name = rows[i].cells[0].textContent;
+                const salary = rows[i].cells[1].querySelector('input').value;
+                const done = rows[i].cells[2].querySelector('.tick-box').classList.contains('checked');
+                
+                if (salary) {
+                    salaryEntries.push({
+                        name,
+                        salary,
+                        done
+                    });
+                }
+            }
+            
+            if (salaryEntries.length === 0) {
+                alert('براہ کرم کم از کم ایک کارکن کی تنخواہ درج کریں');
+                return;
+            }
+            
+            salaryData.push({
+                date,
+                entries: salaryEntries
+            });
+            
+            localStorage.setItem('salaryData', JSON.stringify(salaryData));
+            
+            // Show success message
+            const successElement = document.getElementById('salary-success');
+            successElement.classList.remove('hidden');
+            setTimeout(() => {
+                successElement.classList.add('hidden');
+            }, 3000);
+            
+            // Clear form
+            initializeSalaryTable();
+        });
+
+        // View customer data
+        document.getElementById('view-customer-submit').addEventListener('click', function() {
+            const password = document.getElementById('view-customer-password').value;
+            if (password !== 'gtech123') {
+                document.getElementById('view-customer-password-error').textContent = 'غلط پاس ورڈ';
+                document.getElementById('view-customer-password-error').classList.remove('hidden');
+                return;
+            }
+            
+            document.getElementById('view-customer-password-error').classList.add('hidden');
+            document.getElementById('customer-data-container').classList.remove('hidden');
+            
+            // Populate customer data table
+            const tableBody = document.getElementById('customer-data-body');
+            tableBody.innerHTML = '';
+            
+            customerData.forEach(entry => {
+                const row = document.createElement('tr');
+                
+                const dateCell = document.createElement('td');
+                dateCell.textContent = entry.date;
+                row.appendChild(dateCell);
+                
+                const nameCell = document.createElement('td');
+                nameCell.textContent = entry.name;
+                row.appendChild(nameCell);
+                
+                const locationCell = document.createElement('td');
+                locationCell.textContent = entry.location;
+                row.appendChild(locationCell);
+                
+                const amountPaidCell = document.createElement('td');
+                amountPaidCell.textContent = entry.amountPaid;
+                row.appendChild(amountPaidCell);
+                
+                const amountDueCell = document.createElement('td');
+                amountDueCell.textContent = entry.amountDue;
+                row.appendChild(amountDueCell);
+                
+                const projectCell = document.createElement('td');
+                projectCell.textContent = entry.project;
+                row.appendChild(projectCell);
+                
+                tableBody.appendChild(row);
+            });
+        });
+
+        // View salary data
+        document.getElementById('view-salary-submit').addEventListener('click', function() {
+            const password = document.getElementById('view-salary-password').value;
+            if (password !== 'gtech123') {
+                document.getElementById('view-salary-password-error').textContent = 'غلط پاس ورڈ';
+                document.getElementById('view-salary-password-error').classList.remove('hidden');
+                return;
+            }
+            
+            document.getElementById('view-salary-password-error').classList.add('hidden');
+            document.getElementById('salary-data-container').classList.remove('hidden');
+            
+            // Populate salary data table
+            const tableBody = document.getElementById('salary-data-body');
+            tableBody.innerHTML = '';
+            
+            salaryData.forEach(entry => {
+                entry.entries.forEach(salaryEntry => {
+                    const row = document.createElement('tr');
+                    
+                    const dateCell = document.createElement('td');
+                    dateCell.textContent = entry.date;
+                    row.appendChild(dateCell);
+                    
+                    const nameCell = document.createElement('td');
+                    nameCell.textContent = salaryEntry.name;
+                    row.appendChild(nameCell);
+                    
+                    const salaryCell = document.createElement('td');
+                    salaryCell.textContent = salaryEntry.salary;
+                    row.appendChild(salaryCell);
+                    
+                    const doneCell = document.createElement('td');
+                    doneCell.textContent = salaryEntry.done ? 'ہاں' : 'نہیں';
+                    row.appendChild(doneCell);
+                    
+                    tableBody.appendChild(row);
+                });
+            });
+        });
+
+        // Export functionality
+        document.getElementById('export-customer').addEventListener('click', function() {
+            exportToExcel(customerData, 'customer_data', [
+                { key: 'date', name: 'تاریخ' },
+                { key: 'name', name: 'نام' },
+                { key: 'location', name: 'مقام' },
+                { key: 'amountPaid', name: 'ادا شدہ رقم' },
+                { key: 'amountDue', name: 'بقایا رقم' },
+                { key: 'project', name: 'پروجیکٹ/پروڈکٹ' }
+            ]);
+        });
+
+        document.getElementById('export-salary').addEventListener('click', function() {
+            const formattedSalaryData = [];
+            salaryData.forEach(entry => {
+                entry.entries.forEach(salaryEntry => {
+                    formattedSalaryData.push({
+                        date: entry.date,
+                        name: salaryEntry.name,
+                        salary: salaryEntry.salary,
+                        done: salaryEntry.done ? 'ہاں' : 'نہیں'
+                    });
+                });
+            });
+            
+            exportToExcel(formattedSalaryData, 'salary_data', [
+                { key: 'date', name: 'تاریخ' },
+                { key: 'name', name: 'نام' },
+                { key: 'salary', name: 'تنخواہ' },
+                { key: 'done', name: 'مکمل' }
+            ]);
+        });
+
+        function exportToExcel(data, fileName, columns) {
+            let csvContent = columns.map(col => col.name).join(',') + '\n';
+            
+            data.forEach(item => {
+                let row = columns.map(col => item[col.key]).join(',');
+                csvContent += row + '\n';
+            });
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            
+            link.setAttribute('href', url);
+            link.setAttribute('download', `${fileName}_${new Date().toISOString().slice(0, 10)}.csv`);
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Delete functionality
+        let currentDeleteType = null;
+
+        document.getElementById('delete-customer').addEventListener('click', function() {
+            currentDeleteType = 'customer';
+            showPage('delete-confirmation');
+        });
+
+        document.getElementById('delete-salary').addEventListener('click', function() {
+            currentDeleteType = 'salary';
+            showPage('delete-confirmation');
+        });
+
+        document.getElementById('confirm-delete').addEventListener('click', function() {
+            const password = document.getElementById('delete-password').value;
+            if (password !== 'gtech123') {
+                document.getElementById('delete-password-error').textContent = 'غلط پاس ورڈ';
+                document.getElementById('delete-password-error').classList.remove('hidden');
+                return;
+            }
+            
+            if (currentDeleteType === 'customer') {
+                customerData = [];
+                localStorage.setItem('customerData', JSON.stringify(customerData));
+                document.getElementById('customer-data-body').innerHTML = '';
+                showPage('view-customer-data');
+            } else if (currentDeleteType === 'salary') {
+                salaryData = [];
+                localStorage.setItem('salaryData', JSON.stringify(salaryData));
+                document.getElementById('salary-data-body').innerHTML = '';
+                showPage('view-salary-data');
+            }
+            
+            document.getElementById('delete-password').value = '';
+            document.getElementById('delete-password-error').classList.add('hidden');
+        });
+
+        document.getElementById('cancel-delete').addEventListener('click', function() {
+            document.getElementById('delete-password').value = '';
+            document.getElementById('delete-password-error').classList.add('hidden');
+            
+            if (currentDeleteType === 'customer') {
+                showPage('view-customer-data');
+            } else if (currentDeleteType === 'salary') {
+                showPage('view-salary-data');
+            }
+        });
+
+        // Login functionality
+        document.getElementById('login-btn').addEventListener('click', function() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email !== 'solar@gtech.com') {
+                document.getElementById('email-error').textContent = 'غلط ای میل';
+                document.getElementById('email-error').classList.remove('hidden');
+                return;
+            }
+            
+            if (password !== 'gtech537') {
+                document.getElementById('password-error').textContent = 'غلط پاس ورڈ';
+                document.getElementById('password-error').classList.remove('hidden');
+                return;
+            }
+            
+            document.getElementById('email-error').classList.add('hidden');
+            document.getElementById('password-error').classList.add('hidden');
+            
+            showPage('main-menu');
+        });
+
+        // Navigation event listeners
+        document.getElementById('enter-data-btn').addEventListener('click', function() {
+            showPage('enter-data-menu');
+        });
+
+        document.getElementById('view-data-btn').addEventListener('click', function() {
+            showPage('view-data-menu');
+        });
+
+        document.getElementById('customer-btn').addEventListener('click', function() {
+            showPage('customer-data-entry');
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('customer-date-input').value = today;
+        });
+
+        document.getElementById('salary-btn').addEventListener('click', function() {
+            showPage('salary-data-entry');
+            initializeSalaryTable();
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('salary-date-input').value = today;
+        });
+
+        document.getElementById('view-customer-btn').addEventListener('click', function() {
+            showPage('view-customer-data');
+            document.getElementById('customer-data-container').classList.add('hidden');
+            document.getElementById('view-customer-password').value = '';
+        });
+
+        document.getElementById('view-salary-btn').addEventListener('click', function() {
+            showPage('view-salary-data');
+            document.getElementById('salary-data-container').classList.add('hidden');
+            document.getElementById('view-salary-password').value = '';
+        });
+
+        // Back buttons
+        document.getElementById('back-from-enter-data').addEventListener('click', function() {
+            showPage('main-menu');
+        });
+
+        document.getElementById('back-from-customer').addEventListener('click', function() {
+            showPage('enter-data-menu');
+        });
+
+        document.getElementById('back-from-salary').addEventListener('click', function() {
+            showPage('enter-data-menu');
+        });
+
+        document.getElementById('back-from-view-data').addEventListener('click', function() {
+            showPage('main-menu');
+        });
+
+        document.getElementById('back-from-view-customer').addEventListener('click', function() {
+            showPage('view-data-menu');
+        });
+
+        document.getElementById('back-from-view-salary').addEventListener('click', function() {
+            showPage('view-data-menu');
+        });
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('login-page');
+            updateDateDisplay('main-menu-date');
+        });
+    </script>
+</body>
+</html>
