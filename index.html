@@ -369,7 +369,7 @@
                 <button id="login-btn">لاگ ان</button>
             </div>
         </div>
-
+<button class="menu-button" id="logout-btn">لاگ آؤٹ</button>
         <!-- Main Menu -->
         <div id="main-menu" class="main-menu hidden">
             <div class="date-display" id="main-menu-date"></div>
@@ -588,7 +588,16 @@
             "گڈو شاہ",
             "اضافی کارکن" // Extra worker as requested
         ];
-
+// Auto-login check (put this at the top of your script)
+document.addEventListener('DOMContentLoaded', function() {
+    const isLoggedIn = sessionStorage.getItem('gtechLoggedIn');
+    if (isLoggedIn === 'true') {
+        showPage('main-menu');
+    } else {
+        showPage('login-page');
+    }
+    updateDateDisplay('main-menu-date');
+});
         // Current date display
         function updateDateDisplay(elementId) {
             const now = new Date();
@@ -925,11 +934,11 @@
 
         // Login functionality
        // Replace your existing login function (around line 750) with this:
-document.getElementById('login-btn').addEventListener('click', function() {
+// Replace the login function (around line 750)
+document.getElementById('login-btn').addEventListener('click', function(){
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const rememberMe = document.getElementById('remember-me').checked;
-
+    
     if (email !== 'solar@gtech.com') {
         document.getElementById('email-error').textContent = 'غلط ای میل';
         document.getElementById('email-error').classList.remove('hidden');
@@ -941,6 +950,14 @@ document.getElementById('login-btn').addEventListener('click', function() {
         document.getElementById('password-error').classList.remove('hidden');
         return;
     }
+    
+    // Set session flag
+    sessionStorage.setItem('gtechLoggedIn', 'true');
+    
+    document.getElementById('email-error').classList.add('hidden');
+    document.getElementById('password-error').classList.add('hidden');
+    showPage('main-menu');
+});
     
     // Save credentials if "Remember Me" is checked
     if (rememberMe) {
@@ -955,9 +972,12 @@ document.getElementById('login-btn').addEventListener('click', function() {
     document.getElementById('email-error').classList.add('hidden');
     document.getElementById('password-error').classList.add('hidden');
     showPage('main-menu');
-});
 
-        // Navigation event listeners
+
+      function logout() {
+    sessionStorage.removeItem('gtechLoggedIn');
+    showPage('login-page');
+}  // Navigation event listeners
         document.getElementById('enter-data-btn').addEventListener('click', function() {
             showPage('enter-data-menu');
         });
@@ -972,7 +992,7 @@ document.getElementById('login-btn').addEventListener('click', function() {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('customer-date-input').value = today;
         });
-
+document.getElementById('logout-btn').addEventListener('click', logout);
         document.getElementById('salary-btn').addEventListener('click', function() {
             showPage('salary-data-entry');
             initializeSalaryTable();
