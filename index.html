@@ -217,7 +217,7 @@
         .save-btn:hover {
             background-color: #27ae60;
         }
-        <style>
+        
     /* Existing styles remain the same until line 102 */
     
     /* Add these new media queries at the end of the style section */
@@ -360,6 +360,11 @@
                 <input type="password" id="password" placeholder="پاس ورڈ درج کریں">
                 <div id="password-error" class="error hidden"></div>
             </div>
+            <!-- Add this after the password field in your login form (around line 60) -->
+<div class="form-group">
+    <input type="checkbox" id="remember-me">
+    <label for="remember-me">میرے معلومات یاد رکھیں</label>
+</div>
             <div class="button-group">
                 <button id="login-btn">لاگ ان</button>
             </div>
@@ -919,27 +924,38 @@
         });
 
         // Login functionality
-        document.getElementById('login-btn').addEventListener('click', function() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            if (email !== 'solar@gtech.com') {
-                document.getElementById('email-error').textContent = 'غلط ای میل';
-                document.getElementById('email-error').classList.remove('hidden');
-                return;
-            }
-            
-            if (password !== 'gtech537') {
-                document.getElementById('password-error').textContent = 'غلط پاس ورڈ';
-                document.getElementById('password-error').classList.remove('hidden');
-                return;
-            }
-            
-            document.getElementById('email-error').classList.add('hidden');
-            document.getElementById('password-error').classList.add('hidden');
-            
-            showPage('main-menu');
-        });
+       // Replace your existing login function (around line 750) with this:
+document.getElementById('login-btn').addEventListener('click', function() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const rememberMe = document.getElementById('remember-me').checked;
+
+    if (email !== 'solar@gtech.com') {
+        document.getElementById('email-error').textContent = 'غلط ای میل';
+        document.getElementById('email-error').classList.remove('hidden');
+        return;
+    }
+    
+    if (password !== 'gtech537') {
+        document.getElementById('password-error').textContent = 'غلط پاس ورڈ';
+        document.getElementById('password-error').classList.remove('hidden');
+        return;
+    }
+    
+    // Save credentials if "Remember Me" is checked
+    if (rememberMe) {
+        localStorage.setItem('rememberedUser', JSON.stringify({
+            email: email,
+            password: password
+        }));
+    } else {
+        localStorage.removeItem('rememberedUser');
+    }
+    
+    document.getElementById('email-error').classList.add('hidden');
+    document.getElementById('password-error').classList.add('hidden');
+    showPage('main-menu');
+});
 
         // Navigation event listeners
         document.getElementById('enter-data-btn').addEventListener('click', function() {
