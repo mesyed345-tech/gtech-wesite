@@ -70,7 +70,31 @@
             border-bottom: 2px solid #3498db;
             padding-bottom: 10px;
         }
-        
+        /* Default styles (desktop/laptop ke liye) */
+
+/* Mobile screens ke liye */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px; /* chhoti screen par chhota font */
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 20px; /* heading ko chhota kar do */
+    text-align: center;
+  }
+
+  img {
+    max-width: 100%; /* images screen ke andar fit ho jayein */
+    height: auto;
+  }
+
+  .container {
+    width: 100%; /* container full width ho jaye */
+    padding: 5px;
+  }
+}
+
         .date-display {
             text-align: left;
             font-size: 0.9rem;
@@ -217,126 +241,6 @@
         .save-btn:hover {
             background-color: #27ae60;
         }
-        
-    /* Existing styles remain the same until line 102 */
-    
-    /* Add these new media queries at the end of the style section */
-    
-    /* Tablet and small desktop screens */
-    @media (max-width: 992px) {
-        .container {
-            padding: 15px;
-        }
-        
-        .top-bar h1 {
-            font-size: 2rem;
-        }
-        
-        button {
-            padding: 10px 15px;
-        }
-        
-        .menu-button {
-            width: 90%;
-        }
-    }
-    
-    /* Mobile devices (landscape) */
-    @media (max-width: 768px) {
-        .container {
-            padding: 10px;
-        }
-        
-        .login-container, .main-menu, .data-entry {
-            padding: 20px;
-        }
-        
-        .top-bar h1 {
-            font-size: 1.8rem;
-        }
-        
-        th, td {
-            padding: 8px;
-            font-size: 0.9rem;
-        }
-        
-        input[type="text"],
-        input[type="password"],
-        input[type="number"],
-        input[type="date"],
-        select {
-            padding: 10px;
-            font-size: 14px;
-        }
-        
-        .button-group {
-            flex-direction: column;
-        }
-        
-        .button-group button {
-            margin-bottom: 10px;
-            margin-right: 0;
-            width: 100%;
-        }
-    }
-    
-    /* Small mobile devices (portrait) */
-    @media (max-width: 480px) {
-        .top-bar h1 {
-            font-size: 1.5rem;
-        }
-        
-        h2 {
-            font-size: 1.3rem;
-        }
-        
-        .container {
-            padding: 5px;
-        }
-        
-        .login-container, .main-menu, .data-entry {
-            padding: 15px;
-            margin: 10px auto;
-        }
-        
-        /* Make tables horizontally scrollable on small screens */
-        table {
-            display: block;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-        
-        .menu-button {
-            width: 95%;
-            padding: 12px;
-            font-size: 16px;
-        }
-        
-        .bottom-bar {
-            font-size: 0.8rem;
-            padding: 8px 0;
-        }
-    }
-    
-    /* Very small devices */
-    @media (max-width: 360px) {
-        .top-bar h1 {
-            font-size: 1.3rem;
-        }
-        
-        .menu-button {
-            font-size: 15px;
-        }
-        
-        input[type="text"],
-        input[type="password"],
-        input[type="number"],
-        input[type="date"],
-        select {
-            padding: 8px;
-        }
-    }
-
     </style>
 </head>
 <body>
@@ -360,16 +264,11 @@
                 <input type="password" id="password" placeholder="پاس ورڈ درج کریں">
                 <div id="password-error" class="error hidden"></div>
             </div>
-            <!-- Add this after the password field in your login form (around line 60) -->
-<div class="form-group">
-    <input type="checkbox" id="remember-me">
-    <label for="remember-me">میرے معلومات یاد رکھیں</label>
-</div>
             <div class="button-group">
                 <button id="login-btn">لاگ ان</button>
             </div>
         </div>
-<button class="menu-button" id="logout-btn">لاگ آؤٹ</button>
+
         <!-- Main Menu -->
         <div id="main-menu" class="main-menu hidden">
             <div class="date-display" id="main-menu-date"></div>
@@ -549,7 +448,7 @@
 
     <!-- Bottom Bar -->
     <div class="bottom-bar">
-        G-Tech Solar | مقام: [Near Gujrat GymKhana] | رابطہ: [03006279253]
+        G-Tech Solar | مقام: [اپنا مقام درج کریں] | رابطہ: [رابطہ نمبر درج کریں]
     </div>
 
     <script>
@@ -588,16 +487,7 @@
             "گڈو شاہ",
             "اضافی کارکن" // Extra worker as requested
         ];
-// Auto-login check (put this at the top of your script)
-document.addEventListener('DOMContentLoaded', function() {
-    const isLoggedIn = sessionStorage.getItem('gtechLoggedIn');
-    if (isLoggedIn === 'true') {
-        showPage('main-menu');
-    } else {
-        showPage('login-page');
-    }
-    updateDateDisplay('main-menu-date');
-});
+
         // Current date display
         function updateDateDisplay(elementId) {
             const now = new Date();
@@ -899,7 +789,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById('confirm-delete').addEventListener('click', function() {
             const password = document.getElementById('delete-password').value;
-            if (password !== 'gtech123') {
+            if (password !== 'G-Tech 537') {
                 document.getElementById('delete-password-error').textContent = 'غلط پاس ورڈ';
                 document.getElementById('delete-password-error').classList.remove('hidden');
                 return;
@@ -933,51 +823,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Login functionality
-       // Replace your existing login function (around line 750) with this:
-// Replace the login function (around line 750)
-document.getElementById('login-btn').addEventListener('click', function(){
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    
-    if (email !== 'solar@gtech.com') {
-        document.getElementById('email-error').textContent = 'غلط ای میل';
-        document.getElementById('email-error').classList.remove('hidden');
-        return;
-    }
-    
-    if (password !== 'gtech537') {
-        document.getElementById('password-error').textContent = 'غلط پاس ورڈ';
-        document.getElementById('password-error').classList.remove('hidden');
-        return;
-    }
-    
-    // Set session flag
-    sessionStorage.setItem('gtechLoggedIn', 'true');
-    
-    document.getElementById('email-error').classList.add('hidden');
-    document.getElementById('password-error').classList.add('hidden');
-    showPage('main-menu');
-});
-    
-    // Save credentials if "Remember Me" is checked
-    if (rememberMe) {
-        localStorage.setItem('rememberedUser', JSON.stringify({
-            email: email,
-            password: password
-        }));
-    } else {
-        localStorage.removeItem('rememberedUser');
-    }
-    
-    document.getElementById('email-error').classList.add('hidden');
-    document.getElementById('password-error').classList.add('hidden');
-    showPage('main-menu');
+        document.getElementById('login-btn').addEventListener('click', function() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email !== 'solar@gtech.com') {
+                document.getElementById('email-error').textContent = 'غلط ای میل';
+                document.getElementById('email-error').classList.remove('hidden');
+                return;
+            }
+            
+            if (password !== 'gtech537') {
+                document.getElementById('password-error').textContent = 'غلط پاس ورڈ';
+                document.getElementById('password-error').classList.remove('hidden');
+                return;
+            }
+            
+            document.getElementById('email-error').classList.add('hidden');
+            document.getElementById('password-error').classList.add('hidden');
+            
+            showPage('main-menu');
+        });
 
-
-      function logout() {
-    sessionStorage.removeItem('gtechLoggedIn');
-    showPage('login-page');
-}  // Navigation event listeners
+        // Navigation event listeners
         document.getElementById('enter-data-btn').addEventListener('click', function() {
             showPage('enter-data-menu');
         });
@@ -992,7 +860,7 @@ document.getElementById('login-btn').addEventListener('click', function(){
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('customer-date-input').value = today;
         });
-document.getElementById('logout-btn').addEventListener('click', logout);
+
         document.getElementById('salary-btn').addEventListener('click', function() {
             showPage('salary-data-entry');
             initializeSalaryTable();
